@@ -80,13 +80,13 @@ Array.prototype.insert=function(index,item){
 	function setstart(event){
 		if(tool=="eraser" || tool=="pen")
 			movestate=true;
-		c=document.getElementById("a");
+		var c=document.getElementById("a");
 		cord.sx=event.clientX-c.getBoundingClientRect().left;
 		cord.sy=event.clientY-c.getBoundingClientRect().top;
 	};
 	function setend(event){
                 movestate=false;
-                c=document.getElementById("a");
+                var c=document.getElementById("a");
                 cord.ex=event.clientX-c.getBoundingClientRect().left-cord.sx;
                 cord.ey=event.clientY-c.getBoundingClientRect().top-cord.sy;
 		drawshape(event);
@@ -124,7 +124,6 @@ Array.prototype.insert=function(index,item){
 			var size=Math.sqrt(Math.pow(cord.ex,2)+Math.pow(cord.ey,2));
 			font=size+"px Arial";
 			b_context.font =size+"px Arial";
-			console.log(cord);
 			if(cord.ey>=0)
 				b_context.textBaseline = "top";
 			else
@@ -133,8 +132,8 @@ Array.prototype.insert=function(index,item){
 			ol.push({type:tool,font:font,start:[cord.sx,cord.sy],size:size,color:color,content:text,pointersize:pointersize,ey:cord.ey});
 		};
 		if(tool=="line"){
-                	x=event.clientX-c.getBoundingClientRect().left;
-                	y=event.clientY-c.getBoundingClientRect().top;
+                	var x=event.clientX-b_canvas.getBoundingClientRect().left;
+                	var y=event.clientY-b_canvas.getBoundingClientRect().top;
 			b_context.moveTo(cord.sx,cord.sy);
 			b_context.lineTo(x,y);
 			b_context.stroke();
@@ -153,8 +152,8 @@ Array.prototype.insert=function(index,item){
 		var bcan = document.getElementById("a");
                 var b = bcan.getContext("2d");
 		ps=pointersize;
-                x=event.clientX-bcan.getBoundingClientRect().left;
-                y=event.clientY-bcan.getBoundingClientRect().top;
+                var x=event.clientX-bcan.getBoundingClientRect().left;
+                var y=event.clientY-bcan.getBoundingClientRect().top;
                 b.beginPath();
 		if (tool=="eraser" && movestate==true){
 			b.clearRect(x,y,ps,ps);
@@ -215,8 +214,8 @@ b_context.fillRect(0,0,20,20);
 	function setgrad(t,event,box){
                 var c = document.getElementById(t.id);
                 var ctx = c.getContext("2d");
-                x=event.clientX-c.getBoundingClientRect().left;
-                y=event.clientY-c.getBoundingClientRect().top;
+                var x=event.clientX-c.getBoundingClientRect().left;
+                var y=event.clientY-c.getBoundingClientRect().top;
                 var p=ctx.getImageData(x, y, 1, 1).data;
                 var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
 		color=hex;

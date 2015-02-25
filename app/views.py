@@ -45,7 +45,8 @@ def suggest():
               paint=''
               for x in data:
 		   if text in x[0]:
-                   	paint+=x[0]+"  "
+                   	paint+="<li>"+x[0]+"</li>"
+	      paint="<ol>"+paint+"</ol>"
 	      return jsonify({1:paint})
 	except:
               return jsonify({1:"no data with this name"})

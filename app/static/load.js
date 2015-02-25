@@ -15,6 +15,7 @@
 			datas=JSON.parse(datas[1]);
 			clearscreen();
 			ol=[];
+			tool=null;
 			savepoints=[];
         		savecount=-1;
 			undool=[];
@@ -39,20 +40,20 @@
                 b_context.lineWidth=data.pointersize;
                 b_context.beginPath();
 		if(tool=="rectangle"){
-			x=data.start[0];y=data.start[1];
-                	w=data.spec[0];h=data.spec[1];
+			var x=data.start[0];y=data.start[1];
+                	var w=data.spec[0];h=data.spec[1];
                         b_context.strokeRect(x,y,w,h);
                         b_context.stroke();
                         ol.push({type:'rectangle',start:[x,y],spec:[w,h],color:data.color,pointersize:data.pointersize});
                 };
 		if(tool=="fillrectangle"){
-			x=data.start[0];y=data.start[1];
-                	w=data.spec[0];h=data.spec[1];
+			var x=data.start[0];y=data.start[1];
+                	var w=data.spec[0];h=data.spec[1];
                         b_context.fillRect(x,y,w,h);
                         ol.push({type:'fillrectangle',start:[x,y],spec:[w,h],color:data.color,pointersize:data.pointersize});
 		};
 		if(tool=="circle" || tool=="filledcircle"){
-		       x=data.centre[0];y=data.centre[1];
+		       var x=data.centre[0];y=data.centre[1];
                        var radius=data.radius;
                        b_context.beginPath();
                        b_context.arc(x,y,radius,0,Math.PI*2,false);
@@ -63,11 +64,11 @@
                         ol.push({type:tool,centre:[x,y],radius:data.radius,color:data.color,pointersize:data.pointersize});
 		};
 		if(tool=="text"){
-			x=data.start[0];y=data.start[1];
+			var x=data.start[0];y=data.start[1];
                         var text=data.content;
                         var size=data.size;
                         b_context.font =data.font;
-                        ey=data.ey;
+                        var ey=data.ey;
                         if(ey>=0)
                                 b_context.textBaseline = "top";
                         else
@@ -76,10 +77,10 @@
                         ol.push({type:tool,start:[x,y],size:size,color:data.color,content:text,pointersize:data.pointersize,ey:ey,font:data.font});
 		};
 		if(tool=="line"){
-                        x=data.end[0];
-                        y=data.end[1];
-			s1=data.start[0];
-			s2=data.start[1];
+                        var x=data.end[0];
+                        var y=data.end[1];
+			var s1=data.start[0];
+			var s2=data.start[1];
                         b_context.moveTo(s1,s2);
                         b_context.lineTo(x,y);
                         b_context.stroke();
@@ -87,8 +88,8 @@
                 };
 		if(tool=="eraser"){
 			console.log("eraser");
-			x=data.start[0];y=data.start[1];
-                        ps=data.spec[0];
+			var x=data.start[0];y=data.start[1];
+                        var ps=data.spec[0];
 			b_context.clearRect(x,y,ps,ps);
                         ol.push({type:"eraser",start:[x,y],spec:[ps,ps],color:data.color,pointersize:data.pointersize});
 		};
