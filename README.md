@@ -5,9 +5,9 @@ PaintApp Hosted Here:--
 https://safe-hamlet-4318.herokuapp.com/
 
 
+Want to run this app on your machine
 
-
-------------
+------------------------------------------------------------
 
 git clone https://github.com/aaabhilash97/Paint-App-JS.git
 
